@@ -72,11 +72,9 @@ class EuiccChannelManager(private val context: Context) {
 
             var euiccChannel: EuiccChannel? = null
 
-            if (uiccInfo.isEuicc && !uiccInfo.isRemovable) {
-                Log.d(TAG, "Using TelephonyManager for slot ${uiccInfo.slotIndex}")
-                // TODO: On Tiramisu, we should also connect all available "ports" for MEP support
-                euiccChannel = TelephonyManagerChannel.tryConnect(tm, channelInfo)
-            }
+            Log.d(TAG, "Using TelephonyManager for slot ${uiccInfo.slotIndex}")
+            // TODO: On Tiramisu, we should also connect all available "ports" for MEP support
+            euiccChannel = TelephonyManagerChannel.tryConnect(tm, channelInfo)
 
             if (euiccChannel == null) {
                 euiccChannel = OmapiChannel.tryConnect(seService!!, channelInfo)

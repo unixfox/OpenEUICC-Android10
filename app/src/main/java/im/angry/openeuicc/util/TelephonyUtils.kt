@@ -6,13 +6,15 @@ import com.truphone.lpa.LocalProfileInfo
 import java.lang.Exception
 
 val TelephonyManager.supportsDSDS: Boolean
-    get() = supportedModemCount == 2
+    get() {
+        return false
+    }
 
 var TelephonyManager.dsdsEnabled: Boolean
-    get() = activeModemCount >= 2
-    set(value) {
-        switchMultiSimConfig(if (value) { 2 } else {1})
+    get() {
+        return false
     }
+    set(value) {}
 
 fun SubscriptionManager.tryRefreshCachedEuiccInfo(cardId: Int) {
     if (cardId != 0) {
